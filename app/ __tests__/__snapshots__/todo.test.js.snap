@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /items should match the items snapshot 1`] = `
+[
+  {
+    "completed": false,
+    "id": "7aef3d7c-d301-4846-8358-2a91ec9d6be3",
+    "name": "Test",
+  },
+]
+`;
