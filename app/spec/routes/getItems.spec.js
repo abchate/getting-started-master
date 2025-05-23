@@ -8,12 +8,11 @@ jest.mock('../../src/persistence', () => ({
 
 test('it gets items correctly', async () => {
     const req = {};
-    const res = { send: jest.fn() };
+    const res = { json: jest.fn() }; // correction ici !
     db.getItems.mockReturnValue(Promise.resolve(ITEMS));
 
     await getItems(req, res);
 
-    expect(db.getItems.mock.calls.length).toBe(1);
-    expect(res.send.mock.calls[0].length).toBe(1);
-    expect(res.send.mock.calls[0][0]).toEqual(ITEMS);
+    expect(db.getItems).toHaveBeenCalledTimes(1);
+    expect(res.json).toHaveBeenCalledWith(ITEMS); // plus lisible que l'accès aux calls
 });
