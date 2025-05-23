@@ -1,14 +1,16 @@
-name: Build
+name: CI Tests
+
 on: [push, pull_request]
+
 jobs:
-  build:
-    name: Build
+  test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    - name: Build
-      uses: docker/build-push-action@v3
-      with:
-        push: false
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: cd app && yarn install
+      - run: cd app && yarn test
+      - name: Build Docker image
+        run: cd app && docker build -t getting-started .
